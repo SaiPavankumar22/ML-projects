@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Predicting Properties of Aluminium Billet Model</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-image: radial-gradient(circle, #89f7fe 0%, #66a6ff 100%);
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .form-container {
+            width:560px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 16px;
+            padding: 40px 50px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap:50px;
+            margin-bottom: 25px;
+            margin: 5px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 6px;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            margin: 10px;
+            font-size: 14px;
+            margin-bottom: 20px; /* Added space between input boxes */
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 25px;
+            font-size: 18px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .head {
+            color: #2c3e50;
+            font-family: 'Roboto', sans-serif;
+            font-size: 26px;
+            margin-left: 10px;
+        }
+
+        .box img {
+            height: 50vh;
+            width: 30vw;
+        }
+
+        .box h1 {
+            margin-left: 15px;
+        }
+        .main{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        .set{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <!-- Form -->
+        <div class="form-container">
+            <h2>Predicting Properties of Aluminium Rod </h2>
+            <h4>(Al-99.5%,Cu-0.15%,Fe-0.20%,others-0.15%)</h4>
+            <form id="propertiesForm">
+                <div class="form-row">
+                    <div>
+                        <label for="casting_temp">Casting Temp (°C)</label>
+                        <input type="number" id="casting_temp" name="casting_temp" required>
+                    </div>
+                    <div>
+                        <label for="cooling_temp">Cooling Temp (°C)</label>
+                        <input type="number" id="cooling_temp" name="cooling_temp" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="casting_speed">Casting Speed (mm/min)</label>
+                        <input type="number" id="casting_speed" name="casting_speed" required>
+                    </div>
+                    <div>
+                        <label for="bar_entry_temp">Bar Entry Temp (°C)</label>
+                        <input type="number" id="bar_entry_temp" name="bar_entry_temp" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="emulsion_temp">Emulsion Temp (°C)</label>
+                        <input type="number" id="emulsion_temp" name="emulsion_temp" required>
+                    </div>
+                    <div>
+                        <label for="emulsion_pressure">Emulsion Pressure (bar)</label>
+                        <input type="number" id="emulsion_pressure" name="emulsion_pressure" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label for="emulsion_concentration">Emulsion Conc. (%)</label>
+                        <input type="number" id="emulsion_concentration" name="emulsion_concentration" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="quench_pressure">Quench Pressure (bar)</label>
+                        <input type="number" id="quench_pressure" name="quench_pressure" step="0.01" required>
+                    </div>
+                </div>
+
+                <button type="button" onclick="calculateProperties()">Submit</button>
+            </form>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <!-- Script for calculation -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
